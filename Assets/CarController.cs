@@ -8,7 +8,7 @@ public class CarController : MonoBehaviour
     private float horizontalInput, verticalInput;
     private float currentSteerAngle, currentbreakForce;
     private bool isBreaking;
-
+    public Rigidbody rb;
     // Settings
     [SerializeField] private float motorForce, breakForce, maxSteerAngle;
 
@@ -25,6 +25,9 @@ public class CarController : MonoBehaviour
         HandleMotor();
         HandleSteering();
         UpdateWheels();
+        if (rb.position.y < -1f){
+            FindObjectOfType<GameManager>().EndGame();
+        }
     }
 
     private void GetInput() {
@@ -72,4 +75,5 @@ public class CarController : MonoBehaviour
         wheelTransform.rotation = rot;
         wheelTransform.position = pos;
     }
+    
 }
